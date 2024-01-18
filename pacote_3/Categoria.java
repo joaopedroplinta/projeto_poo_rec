@@ -17,7 +17,7 @@ public class Categoria {
         listaDeCategorias = new ArrayList<>();
     }
 
-    // Getters and Setters
+    // Getters e Setters
     public int getID() {
         return ID;
     }

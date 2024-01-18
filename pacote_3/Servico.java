@@ -8,7 +8,7 @@ public class Servico {
     private double preco;
     private static List<Servico> listaDeServicos;
 
-    // Constructor
+    // Construtor
     public Servico(int ID, String descricao, double preco) {
         this.ID = ID;
         this.descricao = descricao;
@@ -16,7 +16,7 @@ public class Servico {
         listaDeServicos = new ArrayList<>();
     }
 
-    // Getters and Setters
+    // Getters e Setters
     public int getID() {
         return ID;
     }
