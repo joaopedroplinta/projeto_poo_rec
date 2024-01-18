@@ -37,21 +37,21 @@ public class Servico {
         this.preco = preco;
     }
 
-    // CRUD methods
-    public void create() {
-        // Implementation for creating a new Servico object
+    // CRUD metodos
+    public void criar() {
+        // Implementação para criar um novo objeto Servico
     }
 
-    public Servico read(int ID) {
-        // Implementation for reading a Servico object by ID
+    public Servico ler(int ID) {
+        // Implementação para ler um objeto Servico pelo ID
         return null;
     }
 
-    public void update() {
-        // Implementation for updating an existing Servico object
+    public void atualizar() {
+        // Implementação para atualizar um objeto Servico existente
     }
 
-    public void delete() {
-        // Implementation for deleting an existing Servico object
+    public void deletar() {
+        // Implementação para deletar um objeto Servico existente
     }
 }

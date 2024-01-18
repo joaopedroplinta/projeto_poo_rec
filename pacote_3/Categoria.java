@@ -42,20 +42,20 @@ public class Categoria {
     }
 
     // CRUD methods
-    public void create() {
-        // Implementation for creating a new Categoria object
+    public void criar() {
+        // Implementação para criar um novo objeto Categoria
     }
 
-    public Categoria read(int ID) {
-        // Implementation for reading a Categoria object by ID
+    public Categoria ler(int ID) {
+        // Implementação para ler um objeto Categoria pelo ID
         return null;
     }
 
-    public void update() {
-        // Implementation for updating an existing Categoria object
+    public void atualizar() {
+        // Implementação para atualizar um objeto Categoria existente
     }
 
-    public void delete() {
-        // Implementation for deleting an existing Categoria object
+    public void deletar() {
+        // Implementação para deletar um objeto Categoria existente
     }
 }
