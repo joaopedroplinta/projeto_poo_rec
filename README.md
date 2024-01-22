@@ -18,10 +18,7 @@ Este projeto implementa um sistema de reservas para um hotel, permitindo o geren
 1. Clone este repositório.
    ```bash
    git clone https://github.com/joaopedroplinta/projeto_poo_rec
-2. Navegue até o diretório do projeto.
+2. Compile o projeto.
    ```bash
-   cd sistema-reservas-hotel
-3. Compile o projeto.
-   ```bash
-   javac -d out src/*.java
-
+   javac Main.java
+   
