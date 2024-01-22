@@ -4,7 +4,7 @@ Este projeto implementa um sistema de reservas para um hotel, permitindo o geren
 
 ## Requisitos Técnicos
 
-- **JDK 21.0.2**
+- **Java 8 ou superior**
 - Ambiente de desenvolvimento Java (Eclipse, IntelliJ, VS Code)
 
 ## Estrutura do Projeto
