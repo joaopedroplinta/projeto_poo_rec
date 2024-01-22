@@ -2,19 +2,24 @@ import pacote_1.*;
 import pacote_2.*;
 import pacote_3.*;
 import java.util.Scanner;
+import java.io.*;
 
 public class SistemaHotel {
     private static Scanner scanner = new Scanner(System.in);
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_AMARELO = "\u001B[33m";
+    public static final String ANSI_AZUl = "\u001B[34m";
+    public static final String ANSI_VERMELHO = "\u001B[31m";
 
     public static void main(String[] args) {
         exibirMenuPrincipal();
     }
 
     private static void exibirMenuPrincipal() {
-        System.out.println("### Sistema de Reservas para Hotel ###");
-        System.out.println("1. Entrar como Cliente");
-        System.out.println("2. Entrar como Funcionário");
-        System.out.println("3. Sair");
+        System.out.println(ANSI_AMARELO + "Sistema de Reservas para Hotel" + ANSI_RESET);
+        System.out.println(ANSI_AZUl + "1. Entrar como Cliente" + ANSI_RESET);
+        System.out.println(ANSI_AZUl + "2. Entrar como Funcionário" + ANSI_RESET);
+        System.out.println(ANSI_VERMELHO + "3. Sair" + ANSI_RESET);
         System.out.print("Escolha uma opção: ");
 
         int opcao = scanner.nextInt();
@@ -37,7 +42,7 @@ public class SistemaHotel {
     }
 
     private static void menuCliente() {
-        System.out.println("\n### Menu do Cliente ###");
+        System.out.println(ANSI_AMARELO + "\n Menu do Cliente " + ANSI_RESET);
         // Adicione as opções específicas para o cliente aqui
         System.out.println("1. Realizar Reserva");
         System.out.println("2. Consultar Reservas");
@@ -64,7 +69,7 @@ public class SistemaHotel {
     }
 
     private static void menuFuncionario() {
-        System.out.println("\n### Menu do Funcionário ###");
+        System.out.println(ANSI_AMARELO + "\n Menu do Funcionário " + ANSI_RESET);
         // Adicione as opções específicas para o funcionário aqui
         System.out.println("1. Adicionar Cliente");
         System.out.println("2. Adicionar Reserva");
