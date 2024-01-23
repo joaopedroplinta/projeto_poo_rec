@@ -34,4 +34,10 @@ public class Cliente extends Usuario{
     public static void excluirCliente(int ID, List<Cliente> clientes) {
         clientes.removeIf(cliente -> cliente.getID() == ID);
     }
+<<<<<<< HEAD
 }
+=======
+
+  
+}
+>>>>>>> 39b0ec494b617b3019755f601c6a69343e1bc085

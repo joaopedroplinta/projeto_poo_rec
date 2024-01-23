@@ -1,5 +1,5 @@
 package pacote_1;
 
-public class Funcionario {
+public class Funcionario extends Usuario {
     
 }
