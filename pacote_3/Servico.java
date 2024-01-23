@@ -1,19 +1,21 @@
 package pacote_3;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.sql.*;
 
 public class Servico {
     private int ID;
     private String descricao;
     private double preco;
-    private static List<Servico> listaDeServicos;
+
+    private static final String URL = "jdbc:postgresql://localhost:5432/projeto_poo";
+    private static final String USUARIO = "postgres";
+    private static final String SENHA = "1234";
 
     // Construtor
     public Servico(int ID, String descricao, double preco) {
         this.ID = ID;
         this.descricao = descricao;
         this.preco = preco;
-        listaDeServicos = new ArrayList<>();
     }
 
     // Getters e Setters
@@ -41,46 +43,78 @@ public class Servico {
         this.preco = preco;
     }
 
+    // Método auxiliar para conexão
+    private Connection abrirConexao() throws SQLException {
+        return DriverManager.getConnection(URL, USUARIO, SENHA);
+    }
+
     // CRUD metodos
     public void criar(int novoID, String novaDescricao, double novoPreco) {
-        // Implementação para criar um novo objeto Servico
-        Servico novoServico = new Servico(novoID, novaDescricao, novoPreco);
-        listaDeServicos.add(novoServico);
+        try (Connection conexao = abrirConexao();
+            PreparedStatement preparedStatement = conexao.prepareStatement(
+                "INSERT INTO servicos (ID, descricao, preco) VALUES (?, ?, ?)")) {
+
+            preparedStatement.setInt(1, novoID);
+            preparedStatement.setString(2, novaDescricao);
+            preparedStatement.setDouble(3, novoPreco);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // ou lidar com a exceção de acordo com sua lógica de tratamento de erros
+        }
     }
 
     public Servico ler(int ID) {
-        // Implementação para ler um objeto Servico pelo ID
-        for (Servico servico : listaDeServicos) {
-            if (servico.getID() == ID) {
-                return servico;
+        Servico servico = null;
+
+        try (Connection conexao = abrirConexao();
+            PreparedStatement preparedStatement = conexao.prepareStatement(
+                "SELECT * FROM servicos WHERE ID = ?")) {
+
+            preparedStatement.setInt(1, ID);
+
+            try (ResultSet resultado = preparedStatement.executeQuery()) {
+                if (resultado.next()) {
+                    servico = new Servico(resultado.getInt("ID"),
+                            resultado.getString("descricao"),
+                            resultado.getDouble("preco"));
+                }
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // ou lidar com a exceção de acordo com sua lógica de tratamento de erros
         }
-        return null;
+
+        return servico;
     }
 
     public void atualizar(int ID, String novaDescricao, double novoPreco) {
-        // Implementação para atualizar um objeto Servico existente
-        for (Servico servico : listaDeServicos) {
-            if (servico.getID() == ID) {
-                servico.setDescricao(novaDescricao);
-                servico.setPreco(novoPreco);
+        try (Connection conexao = abrirConexao();
+            PreparedStatement preparedStatement = conexao.prepareStatement(
+                "UPDATE servicos SET descricao = ?, preco = ? WHERE ID = ?")) {
 
-                break;
-            }
+            preparedStatement.setString(1, novaDescricao);
+            preparedStatement.setDouble(2, novoPreco);
+            preparedStatement.setInt(3, ID);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // ou lidar com a exceção de acordo com sua lógica de tratamento de erros
         }
     }
 
     public void deletar(int ID) {
-        // Implementação para deletar um objeto Servico existente
-        Servico servicoParaRemover = null;
-        for (Servico servico : listaDeServicos) {
-            if (servico.getID() == ID) {
-                servicoParaRemover = servico;
-                break;
-            }
-        }
-        if (servicoParaRemover != null) {
-            listaDeServicos.remove(servicoParaRemover);
+        try (Connection conexao = abrirConexao();
+            PreparedStatement preparedStatement = conexao.prepareStatement(
+                "DELETE FROM servicos WHERE ID = ?")) {
+
+            preparedStatement.setInt(1, ID);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // ou lidar com a exceção de acordo com sua lógica de tratamento de erros
         }
     }
 }

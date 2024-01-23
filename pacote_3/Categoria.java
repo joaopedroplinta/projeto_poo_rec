@@ -1,14 +1,11 @@
 package pacote_3;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.sql.*;
 
 public class Categoria {
     private int ID;
     private String nome;
     private String descricao;
-    private static List<Categoria> listaDeCategorias;
     
     private static final String URL = "jdbc:postgresql://localhost:5432/projeto_poo";
     private static final String USUARIO = "postgres";
@@ -19,7 +16,6 @@ public class Categoria {
         this.ID = ID;
         this.nome = nome;
         this.descricao = descricao;
-        listaDeCategorias = new ArrayList<>();
     }
 
     // Getters e Setters
@@ -51,47 +47,82 @@ public class Categoria {
         }
     }
 
+    // Método auxiliar para conexão com o banco de dados
+    private Connection abrirConexao() throws SQLException {
+        return DriverManager.getConnection(URL, USUARIO, SENHA);
+    }
+
     // CRUD methods
     public void criar(int novoID, String novoNome, String novaDescricao) {
-        // Implementação para criar um novo objeto Categoria
-        Categoria novaCategoria = new Categoria(novoID, novoNome, novaDescricao);
-        listaDeCategorias.add(novaCategoria);
+        try (Connection conexao = abrirConexao();
+            PreparedStatement preparedStatement = conexao.prepareStatement(
+                "INSERT INTO categorias (ID, nome, descricao) VALUES (?, ?, ?)")) {
 
+            preparedStatement.setInt(1, novoID);
+            preparedStatement.setString(2, novoNome);
+            preparedStatement.setString(3, novaDescricao);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            // Lidar com a exceção de acordo com sua lógica de tratamento de erros
+            e.printStackTrace();
+        }
     }
 
     public Categoria ler(int ID) {
-        // Implementação para ler um objeto Categoria pelo ID
-        for (Categoria categoria : listaDeCategorias) {
-            if (categoria.getID() == ID) {
-                return categoria;
+        Categoria categoria = null;
+
+        try (Connection conexao = abrirConexao();
+            PreparedStatement preparedStatement = conexao.prepareStatement(
+                "SELECT * FROM categorias WHERE ID = ?")) {
+
+            preparedStatement.setInt(1, ID);
+
+            try (ResultSet resultado = preparedStatement.executeQuery()) {
+                if (resultado.next()) {
+                    categoria = new Categoria(resultado.getInt("ID"),
+                            resultado.getString("nome"),
+                            resultado.getString("descricao"));
+                }
             }
+
+        } catch (SQLException e) {
+            // Lidar com a exceção de acordo com sua lógica de tratamento de erros
+            e.printStackTrace();
         }
-        return null;
+
+        return categoria;
     }
 
     public void atualizar(int ID, String novoNome, String novaDescricao) {
-        // Implementação para atualizar um objeto Categoria existente
-        for (Categoria categoria : listaDeCategorias) {
-            if (categoria.getID() == ID) {
-                categoria.setNome(novoNome);
-                categoria.setDescricao(novaDescricao);
+        try (Connection conexao = abrirConexao();
+            PreparedStatement preparedStatement = conexao.prepareStatement(
+                "UPDATE categorias SET nome = ?, descricao = ? WHERE ID = ?")) {
 
-                break;
-            }
+            preparedStatement.setString(1, novoNome);
+            preparedStatement.setString(2, novaDescricao);
+            preparedStatement.setInt(3, ID);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            // Lidar com a exceção de acordo com sua lógica de tratamento de erros
+            e.printStackTrace();
         }
     }
 
     public void deletar(int ID) {
-        // Implementação para deletar um objeto Categoria existente
-        Categoria categoriaParaRemover = null;
-        for (Categoria categoria : listaDeCategorias) {
-            if (categoria.getID() == ID) {
-                categoriaParaRemover = categoria;
-                break;
-            }
-        }
-        if (categoriaParaRemover != null) {
-            listaDeCategorias.remove(categoriaParaRemover);
+        try (Connection conexao = abrirConexao();
+            PreparedStatement preparedStatement = conexao.prepareStatement(
+                "DELETE FROM categorias WHERE ID = ?")) {
+
+            preparedStatement.setInt(1, ID);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            // Lidar com a exceção de acordo com sua lógica de tratamento de erros
+            e.printStackTrace();
         }
     }
 }
