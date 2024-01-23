@@ -2,12 +2,17 @@ package pacote_3;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.*;
 
 public class Categoria {
     private int ID;
     private String nome;
     private String descricao;
     private static List<Categoria> listaDeCategorias;
+    
+    private static final String URL = "jdbc:postgresql://localhost:5432/projeto_poo";
+    private static final String USUARIO = "postgres";
+    private static final String SENHA = "sua_senha";
 
     // Construtor
     public Categoria(int ID, String nome, String descricao) {
