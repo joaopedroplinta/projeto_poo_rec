@@ -11,11 +11,26 @@ public class SistemaHotel {
     public static final String ANSI_AZUl = "\u001B[34m";
     public static final String ANSI_VERMELHO = "\u001B[31m";
 
+    private static void limparTerminal() {
+        try {
+            String os = System.getProperty("os.name").toLowerCase();
+
+            if (os.contains("win")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                new ProcessBuilder("clear").inheritIO().start().waitFor();
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         exibirMenuPrincipal();
     }
 
     private static void exibirMenuPrincipal() {
+        limparTerminal();
         System.out.println(ANSI_AMARELO + "Sistema de Reservas para Hotel" + ANSI_RESET);
         System.out.println(ANSI_AZUl + "1. Entrar como Cliente" + ANSI_RESET);
         System.out.println(ANSI_AZUl + "2. Entrar como Funcionário" + ANSI_RESET);
@@ -42,7 +57,8 @@ public class SistemaHotel {
     }
 
     private static void menuCliente() {
-        System.out.println(ANSI_AMARELO + "\n Menu do Cliente " + ANSI_RESET);
+        limparTerminal();
+        System.out.println(ANSI_AMARELO + "Menu do Cliente" + ANSI_RESET);
         // Adicione as opções específicas para o cliente aqui
         System.out.println("1. Realizar Reserva");
         System.out.println("2. Consultar Reservas");
@@ -69,7 +85,8 @@ public class SistemaHotel {
     }
 
     private static void menuFuncionario() {
-        System.out.println(ANSI_AMARELO + "\n Menu do Funcionário " + ANSI_RESET);
+        limparTerminal();
+        System.out.println(ANSI_AMARELO + "Menu do Funcionário" + ANSI_RESET);
         // Adicione as opções específicas para o funcionário aqui
         System.out.println("1. Adicionar Cliente");
         System.out.println("2. Adicionar Reserva");
