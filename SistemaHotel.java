@@ -60,9 +60,9 @@ public class SistemaHotel {
         limparTerminal();
         System.out.println(ANSI_AMARELO + "Menu do Cliente" + ANSI_RESET);
         // Adicione as opções específicas para o cliente aqui
-        System.out.println("1. Realizar Reserva");
-        System.out.println("2. Consultar Reservas");
-        System.out.println("3. Voltar ao Menu Principal");
+        System.out.println(ANSI_AZUl + "1. Realizar Reserva" + ANSI_RESET);
+        System.out.println(ANSI_AZUl + "2. Consultar Reservas" + ANSI_RESET);
+        System.out.println(ANSI_VERMELHO + "3. Voltar ao Menu Principal" + ANSI_RESET);
         System.out.print("Escolha uma opção: ");
 
         int opcao = scanner.nextInt();
@@ -88,9 +88,9 @@ public class SistemaHotel {
         limparTerminal();
         System.out.println(ANSI_AMARELO + "Menu do Funcionário" + ANSI_RESET);
         // Adicione as opções específicas para o funcionário aqui
-        System.out.println("1. Adicionar Cliente");
-        System.out.println("2. Adicionar Reserva");
-        System.out.println("3. Voltar ao Menu Principal");
+        System.out.println(ANSI_AZUl + "1. Adicionar Cliente" + ANSI_RESET);
+        System.out.println(ANSI_AZUl + "2. Adicionar Reserva" + ANSI_RESET);
+        System.out.println(ANSI_VERMELHO + "3. Voltar ao Menu Principal" + ANSI_RESET);
         System.out.print("Escolha uma opção: ");
 
         int opcao = scanner.nextInt();
