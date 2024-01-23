@@ -9,7 +9,6 @@ Este projeto implementa um sistema de reservas para um hotel, permitindo o geren
 
 ## Estrutura do Projeto
 
-- `src/`: Contém os arquivos-fonte Java do projeto.
 - `README.md`: Documentação do projeto.
 
 ## Como Executar
@@ -20,4 +19,3 @@ Este projeto implementa um sistema de reservas para um hotel, permitindo o geren
 2. Compile o projeto.
    ```bash
    javac SistemaHotel.java
-   
