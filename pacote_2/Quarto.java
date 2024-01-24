@@ -1,5 +1,6 @@
 package pacote_2;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,10 @@ public class Quarto {
     private String categoria;
     private String status;
     private List<Quarto> quartos;
+
+    private static final String URL = "jdbc:postgresql://localhost:5432/projeto_poo";
+    private static final String USUARIO = "postgres";
+    private static final String SENHA = "1234";
 
     // Construtor
     public Quarto(int numero, String categoria, String status) {
@@ -32,6 +37,11 @@ public class Quarto {
 
     public void setStatus(String novoStatus) {
         this.status = novoStatus;
+    }
+
+    // Método auxiliar para conexão
+    private Connection abrirConexao() throws SQLException {
+        return DriverManager.getConnection(URL, USUARIO, SENHA);
     }
 
      // Métodos CRUD para Quarto

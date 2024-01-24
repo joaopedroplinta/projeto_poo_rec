@@ -1,5 +1,6 @@
 package pacote_2;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,10 @@ public class Reserva {
     private String dataCheckOut;
     private double valorTotal;
     private List<Reserva> reservas;
+
+    private static final String URL = "jdbc:postgresql://localhost:5432/projeto_poo";
+    private static final String USUARIO = "postgres";
+    private static final String SENHA = "1234";
 
     // Construtor
     public Reserva(int id, String cliente, Quarto quarto, String dataCheckIn, String dataCheckOut, double valorTotal) {
@@ -50,6 +55,11 @@ public class Reserva {
 
     public void setValorTotal(double novoValorTotal) {
         this.valorTotal = novoValorTotal;
+    }
+
+    // Método auxiliar para conexão
+    private Connection abrirConexao() throws SQLException {
+        return DriverManager.getConnection(URL, USUARIO, SENHA);
     }
 
     // Métodos CRUD para Reserva
