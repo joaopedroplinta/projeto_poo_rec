@@ -52,7 +52,7 @@ public class Reserva {
         this.valorTotal = novoValorTotal;
     }
 
-     // Métodos CRUD para Reserva
+    // Métodos CRUD para Reserva
     public void criarReserva(Reserva reserva) {
         reservas.add(reserva);
     }
