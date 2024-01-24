@@ -103,7 +103,7 @@ public class SistemaHotel {
         switch (opcao) {
             case 1:
                 System.out.println("Implemente a lógica para adicionar cliente aqui.");
-                break;
+                break;                
             case 2:
                 System.out.println("Implemente a lógica para adicionar reserva aqui.");
                 break;
