@@ -53,7 +53,7 @@ public class Categoria {
     }
 
     // CRUD methods
-    public void criar(int novoID, String novoNome, String novaDescricao) {
+    public void criarCategoria(int novoID, String novoNome, String novaDescricao) {
         try (Connection conexao = abrirConexao();
             PreparedStatement preparedStatement = conexao.prepareStatement(
                 "INSERT INTO categorias (ID, nome, descricao) VALUES (?, ?, ?)")) {
@@ -70,7 +70,7 @@ public class Categoria {
         }
     }
 
-    public Categoria ler(int ID) {
+    public Categoria lerCategoria(int ID) {
         Categoria categoria = null;
 
         try (Connection conexao = abrirConexao();
@@ -95,7 +95,7 @@ public class Categoria {
         return categoria;
     }
 
-    public void atualizar(int ID, String novoNome, String novaDescricao) {
+    public void atualizarCategoria(int ID, String novoNome, String novaDescricao) {
         try (Connection conexao = abrirConexao();
             PreparedStatement preparedStatement = conexao.prepareStatement(
                 "UPDATE categorias SET nome = ?, descricao = ? WHERE ID = ?")) {
@@ -112,7 +112,7 @@ public class Categoria {
         }
     }
 
-    public void deletar(int ID) {
+    public void deletarCategoria(int ID) {
         try (Connection conexao = abrirConexao();
             PreparedStatement preparedStatement = conexao.prepareStatement(
                 "DELETE FROM categorias WHERE ID = ?")) {
