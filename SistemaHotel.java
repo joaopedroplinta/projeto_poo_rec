@@ -62,7 +62,7 @@ public class SistemaHotel {
         // Adicione as opções específicas para o cliente aqui
         System.out.println(ANSI_AZUl + "1. Realizar Reserva" + ANSI_RESET);
         System.out.println(ANSI_AZUl + "2. Consultar Reservas" + ANSI_RESET);
-        System.out.println(ANSI_VERMELHO + "3. Voltar ao Menu Principal" + ANSI_RESET);
+        System.out.println(ANSI_VERMELHO + "-1. Voltar ao Menu Principal" + ANSI_RESET);
         System.out.print("Escolha uma opção: ");
 
         int opcao = scanner.nextInt();
@@ -75,7 +75,7 @@ public class SistemaHotel {
             case 2:
                 System.out.println("Implemente a lógica para consultar reservas aqui.");
                 break;
-            case 3:
+            case -1:
                 exibirMenuPrincipal();
                 break;
             default:
@@ -90,7 +90,11 @@ public class SistemaHotel {
         // Adicione as opções específicas para o funcionário aqui
         System.out.println(ANSI_AZUl + "1. Adicionar Cliente" + ANSI_RESET);
         System.out.println(ANSI_AZUl + "2. Adicionar Reserva" + ANSI_RESET);
-        System.out.println(ANSI_VERMELHO + "3. Voltar ao Menu Principal" + ANSI_RESET);
+        System.out.println(ANSI_AZUl + "3. Adicionar Quartos" + ANSI_RESET);
+        System.out.println(ANSI_AZUl + "4. Consultar Clientes" + ANSI_RESET);
+        System.out.println(ANSI_AZUl + "5. Consultar Reservas" + ANSI_RESET);
+        System.out.println(ANSI_AZUl + "6. Consultar Quartos" + ANSI_RESET);
+        System.out.println(ANSI_VERMELHO + "-1. Voltar ao Menu Principal" + ANSI_RESET);
         System.out.print("Escolha uma opção: ");
 
         int opcao = scanner.nextInt();
@@ -104,6 +108,18 @@ public class SistemaHotel {
                 System.out.println("Implemente a lógica para adicionar reserva aqui.");
                 break;
             case 3:
+                System.out.println("Implemente a lógica para adicionar quartos aqui.");
+                break;
+            case 4:
+                System.out.println("Implemente a lógica para consultar clientes aqui.");
+                break;
+            case 5:
+                System.out.println("Implemente a lógica para consultar reservas aqui.");
+                break;
+            case 6:
+                System.out.println("Implemente a lógica para consultar quartos aqui.");
+                break;
+            case -1:
                 exibirMenuPrincipal();
                 break;
             default:
