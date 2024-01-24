@@ -49,7 +49,7 @@ public class Servico {
     }
 
     // CRUD metodos
-    public void criar(int novoID, String novaDescricao, double novoPreco) {
+    public void criarServico(int novoID, String novaDescricao, double novoPreco) {
         try (Connection conexao = abrirConexao();
             PreparedStatement preparedStatement = conexao.prepareStatement(
                 "INSERT INTO servicos (ID, descricao, preco) VALUES (?, ?, ?)")) {
@@ -65,7 +65,7 @@ public class Servico {
         }
     }
 
-    public Servico ler(int ID) {
+    public Servico lerServico(int ID) {
         Servico servico = null;
 
         try (Connection conexao = abrirConexao();
@@ -89,7 +89,7 @@ public class Servico {
         return servico;
     }
 
-    public void atualizar(int ID, String novaDescricao, double novoPreco) {
+    public void atualizarServico(int ID, String novaDescricao, double novoPreco) {
         try (Connection conexao = abrirConexao();
             PreparedStatement preparedStatement = conexao.prepareStatement(
                 "UPDATE servicos SET descricao = ?, preco = ? WHERE ID = ?")) {
@@ -105,7 +105,7 @@ public class Servico {
         }
     }
 
-    public void deletar(int ID) {
+    public void deletarServico(int ID) {
         try (Connection conexao = abrirConexao();
             PreparedStatement preparedStatement = conexao.prepareStatement(
                 "DELETE FROM servicos WHERE ID = ?")) {
