@@ -7,14 +7,16 @@ public class Usuario {
     private int telefone;
     private String endereco;
 
-    public Usuario(int ID, String CPF, String nome, int telefone, String endereco){
+    public Usuario(int ID, String CPF, String nome, int telefone, String endereco) {
         this.ID = ID;
         this.CPF = CPF;
         this.nome = nome;
         this.telefone = telefone;
         this.endereco = endereco;
     }
-  // Getters and Setters são usados para proteger seus dados, especialmente na criação de classes.
+
+    // Getters and Setters são usados para proteger seus dados, especialmente na
+    // criação de classes.
     public int getID() {
         return ID;
     }
