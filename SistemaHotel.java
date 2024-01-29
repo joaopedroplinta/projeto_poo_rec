@@ -60,8 +60,9 @@ public class SistemaHotel {
         limparTerminal();
         System.out.println(ANSI_AMARELO + "Menu do Cliente" + ANSI_RESET);
         // Adicione as opções específicas para o cliente aqui
-        System.out.println(ANSI_AZUl + "1. Realizar Reserva" + ANSI_RESET);
-        System.out.println(ANSI_AZUl + "2. Consultar Reservas" + ANSI_RESET);
+        System.out.println(ANSI_AZUl + "1. Cadastrar Cliente" + ANSI_RESET);
+        System.out.println(ANSI_AZUl + "2. Realizar Reserva" + ANSI_RESET);
+        System.out.println(ANSI_AZUl + "3. Consultar Reservas" + ANSI_RESET);
         System.out.println(ANSI_VERMELHO + "-1. Voltar ao Menu Principal" + ANSI_RESET);
         System.out.print("Escolha uma opção: ");
 
