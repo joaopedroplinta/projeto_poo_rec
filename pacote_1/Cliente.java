@@ -2,35 +2,36 @@ package pacote_1;
 
 import java.util.List;
 
-public class Funcionario extends Usuario {
+public class Cliente extends Usuario{
 
-    public Funcionario(int ID, String CPF, String nome, int telefone, String endereco) {
-        super(ID, CPF, nome, telefone, endereco);
+    public Cliente(int ID, String CPF, String nome, String endereco, int telefone) {
+        super(ID,CPF,nome,telefone,endereco);
     }
 
-    public static Funcionario criarFuncionario(int ID, String CPF, String nome, String endereco, int telefone) {
-        return new Funcionario(ID, CPF, nome, telefone, endereco);
+    public static Cliente criarCliente(int ID, String CPF, String nome, String endereco, int telefone) {
+        return new Cliente(ID, CPF, nome, endereco, telefone);
     }
 
-    public static Funcionario lerFuncionario(int ID, List<Funcionario> funcionarios) {
-        for (Funcionario funcionario : funcionarios) {
-            if (funcionario.getID() == ID) { // o get simula entrada do funcionario
-                return funcionario;
+    public static Cliente lerCliente(int ID, List<Cliente> clientes) {
+        for (Cliente cliente : clientes) {
+            if (cliente.getID() == ID) { // o get simula entrada do cliente
+                return cliente;
             }
         }
-        return null;
+        return null; 
     }
 
-    public static void atualizarFuncionario(int ID, List<Funcionario> funcionarios, Funcionario novosDados) {
-        for (int i = 0; i < funcionarios.size(); i++) {
-            if (funcionarios.get(i).getID() == ID) {
-                funcionarios.set(i, novosDados);
+    
+    public static void atualizarCliente(int ID, List<Cliente> clientes, Cliente novosDados) {
+        for (int i = 0; i < clientes.size(); i++) {
+            if (clientes.get(i).getID() == ID) {
+                clientes.set(i, novosDados);
                 break;
             }
         }
     }
 
-    public static void excluirFuncionario(int ID, List<Funcionario> funcionarios) {
-        funcionarios.removeIf(funcionario -> funcionario.getID() == ID);
+    public static void excluirCliente(int ID, List<Cliente> clientes) {
+        clientes.removeIf(cliente -> cliente.getID() == ID);
     }
 }
