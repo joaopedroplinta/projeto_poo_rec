@@ -9,7 +9,7 @@ public class Categoria {
     
     private static final String URL = "jdbc:postgresql://localhost:5432/projeto_poo";
     private static final String USUARIO = "postgres";
-    private static final String SENHA = "sua_senha";
+    private static final String SENHA = "1234";
 
     // Construtor
     public Categoria(int ID, String nome, String descricao) {
