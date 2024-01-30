@@ -1,8 +1,10 @@
 package pacote_2;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Reserva {
     private int id;
@@ -11,13 +13,11 @@ public class Reserva {
     private String dataCheckIn;
     private String dataCheckOut;
     private double valorTotal;
-    private List<Reserva> reservas;
 
     private static final String URL = "jdbc:postgresql://localhost:5432/projeto_poo";
     private static final String USUARIO = "postgres";
     private static final String SENHA = "1234";
 
-    // Construtor
     public Reserva(int id, String cliente, Quarto quarto, String dataCheckIn, String dataCheckOut, double valorTotal) {
         this.id = id;
         this.cliente = cliente;
@@ -25,10 +25,8 @@ public class Reserva {
         this.dataCheckIn = dataCheckIn;
         this.dataCheckOut = dataCheckOut;
         this.valorTotal = valorTotal;
-        this.reservas = new ArrayList<>();
     }
 
-    // Getters e Setters
     public int getId() {
         return id;
     }
@@ -57,36 +55,86 @@ public class Reserva {
         this.valorTotal = novoValorTotal;
     }
 
-    // Método auxiliar para conexão
     private Connection abrirConexao() throws SQLException {
         return DriverManager.getConnection(URL, USUARIO, SENHA);
     }
 
-    // Métodos CRUD para Reserva
-    public void criarReserva(Reserva reserva) {
-        reservas.add(reserva);
+    public void criarReserva() {
+        try (Connection conexao = abrirConexao();
+             PreparedStatement preparedStatement = conexao.prepareStatement(
+                     "INSERT INTO reservas (cliente, quarto_id, data_checkin, data_checkout, valor_total) " +
+                             "VALUES (?, ?, ?, ?, ?)")) {
+
+            preparedStatement.setString(1, cliente);
+            preparedStatement.setInt(2, quarto.getNumero());
+            preparedStatement.setString(3, dataCheckIn);
+            preparedStatement.setString(4, dataCheckOut);
+            preparedStatement.setDouble(5, valorTotal);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public Reserva lerReserva(int id) {
-        for (Reserva reserva : reservas) {
-            if (reserva.getId() == id) {
-                return reserva;
+        Reserva reserva = null;
+
+        try (Connection conexao = abrirConexao();
+             PreparedStatement preparedStatement = conexao.prepareStatement(
+                     "SELECT * FROM reservas WHERE id = ?")) {
+
+            preparedStatement.setInt(1, id);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    reserva = new Reserva(
+                            resultSet.getInt("id"),
+                            resultSet.getString("cliente"),
+                            new Quarto(
+                                    resultSet.getInt("quarto_id"),
+                                    resultSet.getString("categoria"),
+                                    resultSet.getString("status")
+                            ),
+                            resultSet.getString("data_checkin"),
+                            resultSet.getString("data_checkout"),
+                            resultSet.getDouble("valor_total")
+                    );
+                }
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return null;
+
+        return reserva;
     }
 
-    public void atualizarReserva(int id, Reserva novosDados) {
-        Reserva reserva = lerReserva(id);
-        if (reserva != null) {
-            reserva.setValorTotal(novosDados.getValorTotal());
+    public void atualizarReserva(int id, double novoValorTotal) {
+        try (Connection conexao = abrirConexao();
+            PreparedStatement preparedStatement = conexao.prepareStatement(
+                "UPDATE reservas SET valor_total = ? WHERE id = ?")) {
+
+            preparedStatement.setDouble(1, novoValorTotal);
+            preparedStatement.setInt(2, id);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
     public void deletarReserva(int id) {
-        Reserva reserva = lerReserva(id);
-        if (reserva != null) {
-            reservas.remove(reserva);
+        try (Connection conexao = abrirConexao();
+            PreparedStatement preparedStatement = conexao.prepareStatement(
+                "DELETE FROM reservas WHERE id = ?")) {
+
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
